@@ -50,6 +50,8 @@ use App\Http\Controllers\PhotoController;
 
 Route::get('/hello', [WelcomeController::class,'hello']);
 
+Route::get('/greeting', [WelcomeController::class,'greeting']);
+
 Route::get('/', [HomeController::class,'index']);
 
 Route::get('/about', [AboutController::class,'about']);
@@ -65,3 +67,4 @@ Route::resource('photos', PhotoController::class)->only([
 Route::resource('photos', PhotoController::class)->except([ 
     'create', 'store', 'update', 'destroy' 
 ]);
+

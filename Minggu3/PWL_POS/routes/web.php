@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\KategoriController;
 
 
 /*
@@ -20,3 +21,4 @@ Route::get('/', function () {
 });
 
 Route::get('/level', [LevelController::class, 'index']);
+ROute::get('/kategori', [KategoriController::class, 'index']);

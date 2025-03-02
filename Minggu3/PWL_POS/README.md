@@ -8,7 +8,7 @@ NIM     : 2341720078 <br>
     - APP_KEY digunakan untuk kunci enkripsi di laravel. Fungsinya adalah untuk mengenkripsi data sensitif, seperti session pengguna dan token API, serta memastikan keamanan aplikasi.
 
 2. Pada Praktikum 1, bagaimana kita men-generate nilai untuk APP_KEY?
-- Menggunakan perintah php artisan key:generate 
+    - Menggunakan perintah php artisan key:generate 
 
 3. Pada Praktikum 2.1 - Tahap 1, secara default Laravel memiliki berapa file migrasi? dan untuk apa saja file migrasi tersebut?  
     - Saat membuat proyek Laravel baru, Laravel secara default memiliki 3 file migrasi, yaitu : 

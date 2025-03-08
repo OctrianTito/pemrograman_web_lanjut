@@ -8,75 +8,47 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index() {
-        $user = UserModel::create([
-            'username' => 'manager11',
-            'nama' => 'Manager11',
-            'password' => Hash::make('12345'),
-            'level_id' => 2
+        $user = UserModel::all();
+        return view('user', ['data' => $user]);
+    }
+
+    public function tambah(){
+        return view('user_tambah');
+    }
+
+    public function tambah_simpan(Request $request) {
+        UserModel::create([
+            'username' => $request->username,
+            'nama' => $request->nama,
+            'password' => Hash::make($request->password),
+            'level_id' => $request->level_id
         ]);
-        
-        $user->username = 'manager12';
+
+        return redirect('/user');
+    }
+
+
+    public function ubah($ubah){
+        $user = UserModel::find($ubah);
+        return view('user_ubah', ['data' => $user]);
+    }
+
+    public function ubah_simpan($id, Request $request) {
+        $user = UserModel::find($id);
+        $user->username = $request->username;
+        $user->nama = $request->nama;
+        $user->password = Hash::make($request->password);
+        $user->level_id = $request->level_id;
 
         $user->save();
 
-        $user->wasChanged(); // true
-        $user->wasChanged('username'); // true
-        $user->wasChanged('username', 'level_id'); // true
-        $user->wasChanged('nama'); // false
-        dd($user->wasChanged(['nama', 'username'])); // true
-        // $user = UserModel::firstOrNew(
-        //     [
-        //         'username' => 'manager33',
-        //         'nama' => 'Manager Tiga Tiga',
-        //         'password' => Hash::make(12345),
-        //         'level_id' => 2
-        //     ]
-        // );
+        return redirect('/user');
+    }
 
-        // $user->save();
+    public function hapus($id) {
+        $user = UserModel::find($id);
+        $user->delete();
 
-        // return view('user', ['data' => $user]);
-
-        // $user = UserModel::count('user_id');
-        // return view('user', ['data' => $user]);
-
-        // $user = UserModel::where('username', 'manager9')->firstOrFail();  
-        // return view('user', ['data' => $user]);
-
-        // $user = UserModel::find(1);
-        // return view('user', ['data' => $user]);
-
-        // $data = [
-        //     'level_id' => 2,
-        //     'username' => 'manager_tiga',
-        //     'nama' => 'Manager 3',
-        //     'password' => Hash::make('12345')
-        // ];
-
-        // UserModel::create($data);
-
-        // $user = UserModel::all();
-        // return view('user', ['data' => $user]);
-
-        // JS 3
-        // Menambah data menggunakan Eloquent Model
-        // $data =[
-        //     'username' => 'customer-1',
-        //     'nama' => 'Pelanggan',
-        //     'password' => Hash::make('12345'), // hashing password
-        //     'level_id' => 4
-        // ];
-        // UserModel::insert($data); // Menambahlan data baru ke tabel m_user
-
-        // update data menggunakan Eloquent Model
-        // $data = [
-        //     'nama' => 'Pelanggan Pertama',
-        //     'user_id' => 4
-        // ];
-        // UserModel::where('username', 'customer-1')->update($data);
-
-        // // Mencoba akses model UserModel
-        // $user = UserModel::all(); // mengambil semua data dari tabel m_user
-        // return view('user', ['data' => $user]);
+        return redirect('/user');
     }
 }

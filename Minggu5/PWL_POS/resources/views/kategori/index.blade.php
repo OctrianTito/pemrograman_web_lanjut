@@ -10,9 +10,16 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <div class="card-body">
-                    {{ $dataTable->table() }}
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Manajemen Kategori</h5>
+                    <a href="{{ route('kategori.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Tambah Kategori
+                    </a>
                 </div>
+            </div>
+
+            <div class="card-body">
+                {{ $dataTable->table() }}
             </div>
         </div>
     </div>

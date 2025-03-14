@@ -17,12 +17,12 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="kodeKategori">Kode Kategori</label>
-                    <input type="text" class="form-control" id="kodeKategori" name="kodeKategori" value="untuk makanan, contoh: MKN" placeholder="" onfocus="if (this.value === 'untuk makanan, contoh: MKN') this.value = '';" 
+                    <input type="text" class="form-control" id="kategori_kode" name="kategori_kode" value="untuk makanan, contoh: MKN" placeholder="" onfocus="if (this.value === 'untuk makanan, contoh: MKN') this.value = '';" 
                     onblur="if (this.value === '') this.value = 'untuk makanan, contoh: MKN';">
                 </div>
                 <div class="form-group">
                     <label for="namaKategori">Nama Kategori</label>
-                    <input type="text" class="form-control" id="namaKategori" name="namaKategori" value="nama" placeholder="" onfocus="if (this.value === 'nama') this.value = '';" 
+                    <input type="text" class="form-control" id="kategori_nama" name="kategori_nama" value="nama" placeholder="" onfocus="if (this.value === 'nama') this.value = '';" 
                     onblur="if (this.value === '') this.value = 'nama';">
                 </div>
             </div>

@@ -3,19 +3,32 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserModel extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'm_user';  // Mendefinisikan nama tabel yang digunakan di model ini
-    protected $primaryKey = 'user_id';  // Mendefinisikan PK dari tabel yang digunakan
+    protected $table = 'm_user'; // Nama tabel
+    protected $primaryKey = 'user_id'; // Primary key
+    
+    protected $fillable = [
+        'username',
+        'nama',
+        'password',
+        'level_id',
+    ];
 
-    protected $fillable = ['level_id', 'username', 'nama', 'password'];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-    public function level(): BelongsTo {
-        return $this->belongsTo(LevelModel::class, 'level_id', 'level_id'); // Mendefinisikan relasi OneToOne, menggunakan foreign key level_id dan primary key level_id di tabel m_level
+    public function level()
+    {
+        return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
     }
 }

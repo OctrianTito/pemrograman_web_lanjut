@@ -10,7 +10,6 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +34,17 @@ use App\Http\Controllers\AuthController;
 // Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
 // Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 
+
+Route::pattern('id', '[0-9]+'); // artinya ketika ada parameter {id}, maka harus berupa angka
+
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'postlogin']);
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::middleware(['auth'])->group(function () { // artinya semua route di dalam group ini harus login dulu 
+    // masukkan semua route yang perlu autentikasi di sini
+    Route::get('/', [WelcomeController::class, 'index']);
+});
 
 Route::group(['prefix' => 'user'], function(){
     Route::get('/', [UserController::class, 'index']);              // Menampilkan halaman awal
@@ -124,14 +134,4 @@ Route::group(['prefix' => 'supplier'], function(){
     Route::get('/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete user Ajax
     Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']); // Untuk hapus data user Ajax
     Route::delete('/{id}', [SupplierController::class, 'destroy']);     // Menghapus data user
-});
-
-// Route untuk auth
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post('login', [AuthController::class, 'postlogin']);
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
-// Route yang dilindungi auth
-Route::middleware(['auth'])->group(function () {
-    Route::get('/', [WelcomeController::class, 'index']);
 });

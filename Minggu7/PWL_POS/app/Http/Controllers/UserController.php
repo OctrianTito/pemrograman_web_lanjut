@@ -200,7 +200,12 @@ class UserController extends Controller
                 ]);
             }
 
-            UserModel::create($request->all());
+            UserModel::create([
+                'level_id' => $request->level_id,
+                'username' => $request->username,
+                'nama' => $request->nama,
+                'password' => bcrypt($request->password)
+            ]);
 
             return response()->json([
                 'status' => true,
@@ -234,25 +239,34 @@ class UserController extends Controller
                 'nama' => 'required|max:100',
                 'password' => 'nullable|min:6|max:20'
             ];
-
-            // use Illuminate\Support\Facades\Validator;
+    
             $validator = Validator::make($request->all(), $rules);
-
+    
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // respon json, true: berhasil, false: gagal
+                    'status' => false,
                     'message' => 'Validasi gagal.',
-                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                    'msgField' => $validator->errors()
                 ]);
             }
-
+    
             $check = UserModel::find($id);
             if ($check) {
-                if (!$request->filled('password')) { // jika password tidak diisi, maka hapus dari request
-                    $request->request->remove('password');
+                // Siapkan data untuk diupdate
+                $data = [
+                    'level_id' => $request->level_id,
+                    'username' => $request->username,
+                    'nama' => $request->nama
+                ];
+    
+                // Jika password diisi, hash dan tambahkan ke array data
+                if ($request->filled('password')) {
+                    $data['password'] = bcrypt($request->password);
                 }
-
-                $check->update($request->all());
+    
+                // Update data
+                $check->update($data);
+    
                 return response()->json([
                     'status' => true,
                     'message' => 'Data berhasil diupdate'
@@ -265,7 +279,7 @@ class UserController extends Controller
             }
         }
         return redirect('/');
-    }
+    }    
 
     public function confirm_ajax(string $id){
         $user = UserModel::find($id);

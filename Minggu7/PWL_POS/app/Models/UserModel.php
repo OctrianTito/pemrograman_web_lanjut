@@ -22,9 +22,21 @@ class UserModel extends Authenticatable
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id'); // Mendefinisikan relasi OneToOne, menggunakan foreign key level_id dan primary key level_id di tabel m_level
     }
 
-    public function getAuthIdentifierName()
-{
-    return 'username';
-}
+    public function getAuthIdentifierName(){
+        return 'username';
+    }
 
+    /**
+     * Mendapatkan nama role
+     */
+    public function getRoleName(): string {
+        return $this->level->level_nama;
+    }
+
+    /**
+     * Cek apakah user memiliki role tertentu
+     */
+    public function hasRole($role): bool {
+        return $this->level->level_kode == $role;
+    }
 }

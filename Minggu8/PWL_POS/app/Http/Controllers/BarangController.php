@@ -40,15 +40,10 @@ class BarangController extends Controller
             'harga_jual',
             'kategori_id'
         )->with('kategori');
-        $kategori_id = $request->input('filter_kategori');
-        if (!empty($kategori_id)) {
-            $barang->where('kategori_id', $kategori_id);
+
+        if ($request->kategori_id) {
+            $barang->where('kategori_id', $request->kategori_id);
         }
-        // Filter dari JS8
-        // $kategori_id = $request->input('filter_kategori'); 
-        // if(!empty($kategori_id)){ 
-        //     $barangs->where('kategori_id', $kategori_id); 
-        // } 
 
         return DataTables::of($barang)            
             ->addIndexColumn() // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)

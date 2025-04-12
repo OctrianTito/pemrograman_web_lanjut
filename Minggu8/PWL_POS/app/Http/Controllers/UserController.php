@@ -448,4 +448,57 @@ class UserController extends Controller
 
         return $pdf->stream('Data User '.date('Y-m-d H:i:s').'.pdf');
     }
+
+    public function profile($id)
+     {
+         $breadcrumb = (object)[
+             'title' => 'Profil',
+             'list' => ['Home', 'Profil']
+         ];
+         $activeMenu = 'profile';
+         $user = UserModel::findOrFail($id);
+         return view('user.profile', compact('breadcrumb',  'user', 'activeenu'));
+     }
+ 
+     public function editProfile($id)
+     {
+         $breadcrumb = (object)[
+             'title' => 'Edit Profil',
+             'list' => ['Home', 'Profil','Edit Profil']
+         ];
+         $activeMenu = 'profile';
+         $user = UserModel::findOrFail($id);
+ 
+         return view('user.edit_profile', compact('breadcrumb', 'user', 'activeMenu'));
+     }
+ 
+     public function updateProfile(Request $request, $id)
+     {
+         $request->validate([
+             'nama' => 'required|max:100', //fullname
+             'username' => 'required|min:3|max:20',
+             'password' => 'nullable|min:6|max:20',
+             'profile_picture' => 'nullable|image|max:2048', // Validate profile image
+         ]);
+ 
+         $user = UserModel::findOrFail($id);
+         if (UserModel::where('username', $request->username)->where('user_id', '!=', $id)->exists()) {
+             return redirect()->back()->withErrors(['username' => 'Username telah digunakan']);
+         }else {
+             $user->username = $request->username;
+         }
+         $user->nama = $request->nama;
+         if ($request->password) {
+             $user->password = bcrypt($request->password);
+         }
+         if ($request->hasFile('profile_picture')) {
+             $image = $request->file('profile_picture');
+             $imageContent = file_get_contents($image->getRealPath());
+             $base64Image = 'data:image/' . $image->getClientOriginalExtension() . ';base64,' . base64_encode($imageContent);
+             $user->profile_picture = $base64Image;
+         }
+         $user->save();
+ 
+         return redirect("/profile/{$id}")->with('success', 'Profile updated successfully!');
+     }
 }

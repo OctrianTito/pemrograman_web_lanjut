@@ -34,6 +34,10 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
     // masukkan semua route yang perlu autentikasi di sini
     Route::get('/', [WelcomeController::class, 'index']);
 
+    Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
+    Route::get('/profile/edit/{id}', [UserController::class, 'editProfile'])->name('profile.edit');
+    Route::put('/profile/update/{id}', [UserController::class, 'updateProfile'])->name('profile.update');
+
     // route level
    // artinya sema route di dalam group ini harus punya role ADM (Administrator)
    Route::middleware(['authorize:ADM'])->group(function(){

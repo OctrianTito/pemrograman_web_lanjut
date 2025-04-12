@@ -12,8 +12,15 @@
   </div> 
   <!-- Sidebar Menu --> 
   <nav class="mt-2"> 
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"> 
-      <li class="nav-item"> 
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <li class="nav-header">Profile</li>
+      <li class="nav-item">
+        <a href="{{ url('/profile/' . Auth::user()->user_id) }}" class="nav-link {{ $activeMenu == 'profile' ? 'active' : '' }}">
+          <i class="nav-icon fas fa-user-circle"></i>
+            <p>Manajemen Profile</p>
+        </a>
+      </li>
+      <li class="nav-item">
         <a href="{{ url('/') }}" class="nav-link  {{ ($activeMenu == 'dashboard')? 'active' : '' }} "> 
           <i class="nav-icon fas fa-tachometer-alt"></i> 
           <p>Dashboard</p> 

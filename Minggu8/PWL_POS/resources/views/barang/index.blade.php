@@ -5,9 +5,9 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a href="{{ url('/barang/export_pdf') }}" class="btn btn-sm btn-warning"><i class="fa fa-file-pdf"></i> Export Barang</a> 
+                <a href="{{ url('/barang/export_pdf') }}" class="btn btn-sm btn-warning mt-1"><i class="fa fa-file-pdf"></i> Export Barang</a> 
                 <button onclick="modalAction('{{ url('barang/import') }}')" class="btn btn-sm btn-info mt-1">Import Barang</button>
-                <a href="{{ url('/barang/export_excel') }}" class="btn btn-sm btn-primary"><i class="fa fa-file-excel"></i> Export Barang</a> 
+                <a href="{{ url('/barang/export_excel') }}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-excel"></i> Export Barang</a> 
                 <button onclick="modalAction('{{ url('barang/create_ajax') }}')" class="btn btn-sm btn-success mt-1">
                     Tambah Data (Ajax)
                 </button>
@@ -152,14 +152,13 @@
                 } 
             }); 
         
-            $('.filter_kategori').change(function(){ 
-                tableBarang.draw(); 
-            });
+            // $('.filter_kategori').change(function(){ 
+            //     tableBarang.draw(); 
+            // });
 
             $('#kategori_id').on('change', function() {
                 tableBarang.ajax.reload();
             });
-
         });
     </script>
 @endpush

@@ -76,7 +76,7 @@
                 <th class="text-center">No</th> 
                 <th>Username</th> 
                 <th>Nama</th> 
-                <th>Level Pengguna</th> 
+                <th>Level Pengguna</th>
             </tr> 
         </thead>
         <tbody>

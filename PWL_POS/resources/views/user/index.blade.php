@@ -5,7 +5,9 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('user/create') }}">Tambah</a>
+                <a href="{{ url('/user/export_pdf') }}" class="btn btn-sm btn-warning mt-1"><i class="fa fa-file-pdf"></i> Export Barang</a>
+                <button onclick="modalAction('{{ url('user/import') }}')" class="btn btn-sm btn-info mt-1">Import User</button>
+                <a href="{{ url('/user/export_excel') }}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-excel"></i> Export User</a> 
                 <button onclick="modalAction('{{ url('user/create_ajax') }}')" class="btn btn-sm btn-success mt-1">
                     Tambah Ajax
                 </button>
@@ -65,9 +67,10 @@
                 $('#myModal').modal('show');
             });
         }
-        var dataUser;
+        var tableUser;
         $(document).ready(function() {
-            dataUser = $('#table_user').DataTable({
+            tableUser = $('#table_user').DataTable({
+                processing: true,
                 // serverSide: true, jika ingin menggunakan server side processing
                 serverSide: true,
                 ajax: {
@@ -82,18 +85,21 @@
                         // nomor urut dari laravel datatable addIndexColumn()
                         data: "DT_RowIndex",
                         className: "text-center",
+                        width: "5%",
                         orderable: false,
                         searchable: false
                     },
                     {
                         data: "username",
                         className: "",
+                        width: "25%",
                         orderable: true, // jika ingin kolom ini bisa diurutkan
                         searchable: true // jika ingin kolom ini bisa dicari
                     },
                     {
                         data: "nama",
                         className: "",
+                        width: "20%",
                         orderable: true,
                         searchable: true
                     },
@@ -101,20 +107,32 @@
                         // mengambil data level hasil dari ORM berelasi
                         data: "level.level_nama",
                         className: "",
+                        width: "25%",
                         orderable: false,
                         searchable: false
                     },
                     {
                         data: "aksi",
                         className: "",
+                        width: "15%",
                         orderable: false,
                         searchable: false
                     }
                 ]
             });
 
+            $('#table-user_filter input').unbind().bind().on('keyup', function(e){ 
+                if(e.keyCode == 13){ // enter key 
+                    tableUser.search(this.value).draw(); 
+                } 
+            }); 
+        
+            $('.filter_level').change(function(){ 
+                tableUser.draw(); 
+            });
+
             $('#level_id').on('change', function() {
-                dataUser.ajax.reload();
+                tableUser.ajax.reload();
             })
         });
     </script>

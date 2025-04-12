@@ -5,7 +5,9 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create') }}">Tambah</a>
+                <a href="{{ url('/kategori/export_pdf') }}" class="btn btn-sm btn-warning mt-1"><i class="fa fa-file-pdf"></i> Export Barang</a>
+                <button onclick="modalAction('{{ url('kategori/import') }}')" class="btn btn-sm btn-info mt-1">Import Kategori</button>
+                <a href="{{ url('/kategori/export_excel') }}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-excel"></i> Export Kategori</a> 
                 <button onclick="modalAction('{{ url('kategori/create_ajax') }}')" class="btn btn-sm btn-success mt-1">
                     Tambah Ajax
                 </button>
@@ -45,9 +47,10 @@
             });
         }
 
-        var dataKategori;
+        var tableKategori;
         $(document).ready(function() {
-            dataKategori = $('#table_kategori').DataTable({
+            tableKategori = $('#table_kategori').DataTable({
+                processing: true,
                 serverSide: true,
                 ajax: {
                     "url": "{{ url('kategori/list') }}",
@@ -57,24 +60,28 @@
                 columns: [{
                         data: "DT_RowIndex",
                         className: "text-center",
+                        width: "5%",
                         orderable: false,
                         searchable: false
                     },
                     {
                         data: "kategori_kode",
                         className: "",
+                        width: "35%",
                         orderable: true,
                         searchable: true
                     },
                     {
                         data: "kategori_nama",
                         className: "",
+                        width: "35%",
                         orderable: true,
                         searchable: true
                     },
                     {
                         data: "aksi",
                         className: "",
+                        width: "15%",
                         orderable: false,
                         searchable: false
                     }

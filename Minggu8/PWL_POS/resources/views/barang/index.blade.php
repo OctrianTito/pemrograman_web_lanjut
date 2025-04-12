@@ -156,7 +156,7 @@
             });
 
             $('#kategori_id').on('change', function() {
-                dataUser.ajax.reload();
+                tableBarang.ajax.reload();
             });
 
         });

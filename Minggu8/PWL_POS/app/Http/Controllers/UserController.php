@@ -2,11 +2,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserModel;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\LevelModel;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class UserController extends Controller
 {
@@ -313,4 +313,73 @@ class UserController extends Controller
         }
         return redirect('/');
     }
+
+    public function import() 
+    { 
+        return view('user.import'); 
+    } 
+
+    public function import_ajax(Request $request) 
+    { 
+        if($request->ajax() || $request->wantsJson()){ 
+            $rules = [ 
+                // validasi file harus xls atau xlsx, max 1MB 
+                'file_user' => ['required', 'mimes:xlsx', 'max:1024'] 
+            ]; 
+ 
+            $validator = Validator::make($request->all(), $rules); 
+            if($validator->fails()){ 
+                return response()->json([ 
+                    'status' => false, 
+                    'message' => 'Validasi Gagal', 
+                    'msgField' => $validator->errors() 
+                ]); 
+            } 
+ 
+            $file = $request->file('file_user');              // ambil file dari request 
+ 
+            $reader = IOFactory::createReader('Xlsx');              // load reader file excel 
+            $reader->setReadDataOnly(true);                         // hanya membaca data 
+            $spreadsheet = $reader->load($file->getRealPath());     // load file excel 
+            $sheet = $spreadsheet->getActiveSheet();                // ambil sheet yang aktif 
+
+            $data = $sheet->toArray(null, false, true, true);       // ambil data excel 
+ 
+            $insert = []; 
+            if(count($data) > 1){ // jika data lebih dari 1 baris 
+                foreach ($data as $baris => $value) { 
+                    if($baris > 1){ // baris ke 1 adalah header, maka lewati
+                        $password = $value['D'];
+                        if(strlen($password) < 6) {
+                            // Mengatur password agar memiliki panjang minimal 6 karakter
+                            $password = str_pad($password, 6, '0'); // Misalnya, menambahkan '0' sampai panjang 6 karakter
+                        }
+                        $insert[] = [ 
+                            'level_id' => $value['A'], 
+                            'username' => $value['B'], 
+                            'nama' => $value['C'],
+                            'password' => bcrypt($password), 
+                            'created_at' => now(), 
+                        ];
+                    } 
+                } 
+ 
+                if(count($insert) > 0){ 
+                    // insert data ke database, jika data sudah ada, maka diabaikan 
+                    UserModel::insertOrIgnore($insert);    
+                } 
+ 
+                return response()->json([ 
+                    'status' => true, 
+                    'message' => 'Data berhasil diimport' 
+                ]); 
+            } else { 
+                return response()->json([ 
+                    'status' => false, 
+                    'message' => 'Tidak ada data yang diimport' 
+                ]); 
+            } 
+        } 
+        return redirect('/'); 
+    } 
 }

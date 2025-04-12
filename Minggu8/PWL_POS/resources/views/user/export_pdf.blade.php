@@ -68,7 +68,7 @@
             </td> 
         </tr> 
     </table> 
-    
+
     <h3 class="text-center">LAPORAN DATA USER</h4> 
     <table class="border-all"> 
         <thead> 
@@ -78,8 +78,8 @@
                 <th>Nama</th> 
                 <th>Level Pengguna</th> 
             </tr> 
-        </thead> 
-        <tbody> 
+        </thead>
+        <tbody>
             @foreach($user as $u) 
                 <tr> 
                     <td class="text-center">{{ $loop->iteration }}</td> 

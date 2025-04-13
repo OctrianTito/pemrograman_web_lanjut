@@ -23,7 +23,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-indigo">
             <div class="card-header bg-indigo text-center">
-                <a href="{{ url('/') }}" class="h1 text-white"><b>Admin</b>LTE</a>
+                <a href="{{ url('/') }}" class="h1 text-white">Point of Sales</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>

@@ -22,9 +22,9 @@
         }
         img.image{ 
             width: auto; 
-            height: 30px; 
-            max-width: 100px; 
-            max-height: 100px; 
+            height: 90px; 
+            max-width: 120px; 
+            max-height: 120px; 
         } 
         .text-right { 
             text-align: right; 

@@ -16,7 +16,7 @@
       <li class="nav-header">Profile</li>
       <li class="nav-item">
         <a href="{{ url('/profile/' . Auth::user()->user_id) }}" class="nav-link {{ $activeMenu == 'profile' ? 'active' : '' }}">
-          <i class="nav-icon fas fa-user-circle"></i>
+            <img src="..\public\rooney.jpg" class="nav-icon rounded-circle" style="width: 1.25rem; height: 1.25rem;">
             <p>Manajemen Profile</p>
         </a>
       </li>
@@ -68,16 +68,9 @@
       <li class="nav-item"> 
         <a href="{{ url('/barang') }}" class="nav-link {{ ($activeMenu == 'penjualan')? 'active' : '' }} "> 
           <i class="nav-icon fas fa-cash-register"></i> 
-          <p>Transaksi Penjualan</p> 
+          <p>Data Penjualan</p> 
         </a> 
       </li>
-      <li class="nav-header">Aksi</li> 
-      <li class="nav-item bg-danger rounded"> 
-        <a href="{{ url('/logout') }}" class="nav-link"> 
-          <i class="nav-icon fas fa-power-off"></i> 
-          <p>Logout</p> 
-        </a> 
-      </li> 
     </ul> 
   </nav> 
 </div>

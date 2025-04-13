@@ -1,25 +1,25 @@
-@extends('layouts.template')
-
-@section('content')
-    <div class="card card-outline card-primary">
-        <div class="card-header">
-            <h3 class="card-title">{{ $page->title }}</h3>
-            <div class="card-tools"></div>
+<div id="modal-master" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Data Supplier</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-        <div class="card-body">
-            <div class="form-group">
-                <label><strong>Kode Supplier:</strong></label>
-                <p>{{ $supplier->supplier_kode }}</p>
-            </div>
-            <div class="form-group">
-                <label><strong>Nama Supplier:</strong></label>
-                <p>{{ $supplier->supplier_nama }}</p>
-            </div>
-            <div class="form-group">
-                <label><strong>Alamat Supplier:</strong></label>
-                <p>{{ $supplier->supplier_alamat }}</p>
-            </div>
-            <a href="{{ url('supplier') }}" class="btn btn-secondary">Kembali</a>
+        <div class="modal-body">
+            <table class="table table-bordered table-striped table-hover table-sm">
+                <tr>
+                    <th>Kode Supplier</th>
+                    <td>{{ $supplier->supplier_kode }}</td>
+                </tr>
+                <tr>
+                    <th>Nama Supplier</th>
+                    <td>{{ $supplier->supplier_nama }}</td>
+                </tr>
+                <tr>
+                    <th>Alamat Suppplier</th>
+                    <td>{{ $supplier->supplier_alamat }}
+            </table>
         </div>
     </div>
-@endsection
+</div>

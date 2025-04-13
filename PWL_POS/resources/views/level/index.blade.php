@@ -33,8 +33,10 @@
     <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static"
         data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
+
 @push('css')
 @endpush
+
 @push('js')
     <script>
         function modalAction(url = '') {

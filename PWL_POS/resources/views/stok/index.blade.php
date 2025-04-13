@@ -7,7 +7,7 @@
                 <a href="{{ url('/stok/export_pdf') }}" class="btn btn-sm btn-warning mt-1"><i class="fa fa-file-pdf"></i> Export Stok</a>
                 <button onclick="modalAction('{{ url('stok/import') }}')" class="btn btn-sm btn-info mt-1">Import Stok</button>
                 <a href="{{ url('/stok/export_excel') }}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-excel"></i> Export Stok</a> 
-                 <button onclick="modalAction('{{ url('stok/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Stok</button>
+                <button onclick="modalAction('{{ url('stok/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Stok</button>
              </div>
          </div>
  
@@ -62,11 +62,15 @@
             $('#myModal').load(url, function() {
                 $('#myModal').modal('show');
             });
+
+            // $.get(url, function(data) {
+            //     $('#modal-master .modal-content').html(data); // Memasukkan konten ke dalam modal
+            //     $('#modal-master').modal('show'); // Menampilkan modal
+            // });
         }
         var tableStok;
         $(document).ready(function() {
             tableStok = $('#table_stok').DataTable({
-                processing: true,
                 // serverSide: true, jika ingin menggunakan server side processing
                 serverSide: true,
                 ajax: {
@@ -74,7 +78,7 @@
                     dataType: "json",
                     type: "POST",
                     data: function(d) {
-                        d.stok_id = $('#stok_id').val();
+                        d.barang_id = $('#barang_id').val();
                     }
                 },
                 columns: [{
@@ -138,17 +142,13 @@
                 ]
             });
 
-            $('#table-user_filter input').unbind().bind().on('keyup', function(e){ 
+            $('#table-barang_filter input').unbind().bind().on('keyup', function(e){ 
                 if(e.keyCode == 13){ // enter key 
                     tableStok.search(this.value).draw(); 
                 } 
-            }); 
-        
-            $('.filter_level').change(function(){ 
-                tableStok.draw(); 
             });
 
-            $('#level_id').on('change', function() {
+            $('#barang_id').on('change', function() {
                 tableStok.ajax.reload();
             })
         });

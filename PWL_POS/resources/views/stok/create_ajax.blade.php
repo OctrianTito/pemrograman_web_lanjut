@@ -1,6 +1,6 @@
-<form action="{{ url('/stok/ajax') }}" method="POST" id="form-tambah-stok">
+<form action="{{ url('/stok/ajax') }}" method="POST" id="form-tambah">
      @csrf
-     <div id="modal-stok" class="modal-dialog modal-md" role="document">
+     <div id="modal-master" class="modal-dialog modal-md" role="document">
          <div class="modal-content">
              <div class="modal-header">
                  <h5 class="modal-title">Tambah Data Stok</h5>
@@ -28,9 +28,7 @@
                                  <option value="{{ $item->user_id }}">{{ $item->username }}</option>
                              @endforeach
                          </select>
-                         @error('user_id')
-                             <small class="text-danger">{{ $message }}</small>
-                         @enderror
+                         <small id="error-user_id" class="error-text form-text text-danger"></small>
                      </div>
                  </div>
                  <div class="form-group">
@@ -53,12 +51,12 @@
  </form>
  <script>
      $(document).ready(function () {
-         $("#form-tambah-stok").validate({
+         $("#form-tambah").validate({
              rules: {
                  barang_id: { required: true },
                  user_id: {required: true},
                  stok_tanggal: { required: true },
-                 stok_jumlah: { required: true, min: 1 },
+                 stok_jumlah: { required: true },
              },
              submitHandler: function (form) {
                  $.ajax({
@@ -73,7 +71,7 @@
                                  title: 'Berhasil',
                                  text: response.message
                              });
-                             dataStok.ajax.reload(); // pastikan dataStok = DataTable stok
+                             tableStok.ajax.reload();
                          } else {
                              $('.error-text').text('');
                              $.each(response.msgField, function (prefix, val) {

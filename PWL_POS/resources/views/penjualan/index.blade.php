@@ -5,10 +5,10 @@
          <div class="card-header">
              <h3 class="card-title">{{ $page->title }}</h3>
              <div class="card-tools">
+                 <a href="{{ url('/penjualan/export_pdf') }}" class="btn btn-sm btn-warning"><i class="fa fa-file-pdf"></i> Export Penjualan</a>
                  <button onclick="modalAction('{{ url('/penjualan/import') }}')" class="btn btn-sm btn-info">Import Penjualan</button>
                  <a href="{{ url('/penjualan/export_excel') }}" class="btn btn-sm btn-primary"><i class="fa fa-file-excel"></i> Export Penjualan</a>
-                 <a href="{{ url('/penjualan/export_pdf') }}" class="btn btn-sm btn-warning"><i class="fa fa-file-pdf"></i> Export Penjualan</a>
-                 <button onclick="modalAction('{{ url('penjualan/create_ajax') }}')" class="btn btn-sm btn-success">Tambah Transaksi</button>
+                 <button onclick="modalAction('{{ url('penjualan/create_ajax') }}')" class="btn btn-sm btn-success">Tambah Penjualan</button>
              </div>
          </div>
          <div class="card-body">
@@ -86,7 +86,7 @@
                          searchable: false
                         },
                         {
-                         data: "user.nama",
+                         data: "user.username",
                          className: "",
                          width: "15%",
                          orderable: true,
@@ -111,21 +111,11 @@
                          className: "",
                          width: "20%",
                          orderable: true,
-                         searchable: true
+                         searchable: true,
                          render: function(data, type, row) {
                             const date = new Date(data);
                             return new Intl.DateTimeFormat('id').format(date);
                         }
-                     },
-                     {
-                         data: "penjualan_jumlah",
-                         className: "",
-                         width: "10%",
-                         orderable: true,
-                         searchable: true
-                         render: function(data, type,row) {
-                            return new Intl.NumberFormat('id').format(data);
-                         }
                      },
                      {
                          data: "aksi",

@@ -71,7 +71,7 @@
         $(document).ready(function() {
             $("#form-edit").validate({
                 rules: {
-                    barang_kode: { required: true, minlength: 7, maxlength: 10 },
+                    barang_kode: { required: true, minlength: 4, maxlength: 10 },
                     barang_nama: { required: true, maxlength: 100 },
                     harga_beli: { required: true },
                     harga_jual: { required: true },
@@ -90,7 +90,7 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                dataUser.ajax.reload();
+                                tableBarang.ajax.reload();
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {

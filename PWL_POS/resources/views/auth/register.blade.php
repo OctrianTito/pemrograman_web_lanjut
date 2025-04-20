@@ -25,7 +25,7 @@
             <div class="col-md-6">
                 <div class="card card-outline card-indigo shadow-lg">
                     <div class="card-header bg-indigo text-center">
-                        <a href="{{ url('/register') }}" class="h1 text-white"><b>Admin</b>LTE</a>
+                        <a href="{{ url('/register') }}" class="h1 text-white"><b>Poin of Sales</a>
                     </div>
                     <div class="card-body p-4">
                         <h4 class="text-center mb-4">Pendaftaran Akun Baru</h4>
@@ -119,16 +119,16 @@
                 rules: {
                     nama: {
                         required: true,
-                        minlength: 3
+                        minlength: 1
                     },
                     username: {
                         required: true,
-                        minlength: 4,
+                        minlength: 1,
                         maxlength: 20
                     },
                     password: {
                         required: true,
-                        minlength: 5,
+                        minlength: 6,
                         maxlength: 20
                     },
                     level_id: {

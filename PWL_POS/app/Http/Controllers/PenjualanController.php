@@ -64,8 +64,8 @@ class PenjualanController extends Controller
          if ($request->ajax() || $request->wantsJson()) {
              $rules = [
                  'user_id' => 'required|exists:m_user,user_id',
-                 'pembeli' => 'required|string|max:100',
                  'penjualan_kode' => 'required|string|min:5',
+                 'pembeli' => 'required|string|max:100',
                  'penjualan_tanggal' => 'required|date',
              ];
  
@@ -77,8 +77,8 @@ class PenjualanController extends Controller
  
              PenjualanModel::create([
                  'user_id' => $request->user_id,
-                 'pembeli' => $request->pembeli,
                  'penjualan_kode' => $request->penjualan_kode,
+                 'pembeli' => $request->pembeli,
                  'penjualan_tanggal' => $request->penjualan_tanggal,
              ]);
  
@@ -115,8 +115,8 @@ class PenjualanController extends Controller
          if ($request->ajax() || $request->wantsJson()) {
              $rules = [
                  'user_id' => 'required|exists:m_user,user_id',
-                 'pembeli' => 'required|string|max:100',
                  'penjualan_kode' => 'required|string|min:5',
+                 'pembeli' => 'required|string|max:100',
                  'penjualan_tanggal' => 'required|date',
              ];
              $validator = Validator::make($request->all(), $rules);
@@ -179,14 +179,14 @@ class PenjualanController extends Controller
                 // validasi file harus xls atau xlsx, max 1MB 
                 'file_penjualan' => ['required', 'mimes:xlsx', 'max:1024'] 
             ]; 
- 
+
             $validator = Validator::make($request->all(), $rules); 
             if($validator->fails()){ 
                 return response()->json([ 
                     'status' => false, 
                     'message' => 'Validasi Gagal', 
                     'msgField' => $validator->errors() 
-                ]); 
+                ]);
             } 
  
             $file = $request->file('file_penjualan');              // ambil file dari request 
@@ -203,15 +203,15 @@ class PenjualanController extends Controller
                 foreach ($data as $baris => $value) { 
                     if($baris > 1){ // baris ke 1 adalah header, maka lewati
 
-                        // Mengonversi tanggal dari format Excel ke DateTime
-                        $penjualanTanggal = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value['C']);
+                        // Mengubah tanggal dari format Excel ke DateTime
+                        $penjualanTanggal = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value['D']);
                         $penjualanTanggal = $penjualanTanggal->format('Y-m-d H:i:s');
                         $insert[] = [
                             'user_id' => $value['A'],
-                            'pembeli' => $value['B'],
+                            'penjualan_kode' => $value['B'],
+                            'pembeli' => $value['C'],
                             'penjualan_tanggal' => $penjualanTanggal,
-                            'penjualan_jumlah' => $value['D'], 
-                            'created_at' => now(), 
+                            'created_at' => now(),
                         ];
                     }
                 } 
@@ -237,7 +237,7 @@ class PenjualanController extends Controller
 
     public function export_excel() {
         // ambil data barang yang akan di export
-        $penjualan = PenjualanModel::select( 'user_id', 'pembeli', 'penjualan_tanggal', 'penjualan_jumlah')
+        $penjualan = PenjualanModel::select( 'user_id', 'penjualan_kode', 'pembeli', 'penjualan_tanggal')
         ->orderBy('penjualan_tanggal')
         ->with( 'user')
         ->get();
@@ -247,22 +247,21 @@ class PenjualanController extends Controller
         $sheet = $spreadsheet->getActiveSheet(); // ambil sheet yang aktif
 
         $sheet->setCellValue('A1', 'No');
-        $sheet->setCellValue('B1', 'Kode Penjualan');
-        $sheet->setCellValue('C1', 'Nama Staff');
+        $sheet->setCellValue('B1', 'Nama Staff');
+        $sheet->setCellValue('C1', 'Kode Penjualan');
         $sheet->setCellValue('D1', 'Nama Pembeli');
         $sheet->setCellValue('E1', 'Tanggal Penjualan');
-        $sheet->setCellValue('F1', 'Jumlah Penjualan');
 
-        $sheet->getStyle('A1:F1')->getFont()->setBold(true); // bold header
+        $sheet->getStyle('A1:E1')->getFont()->setBold(true); // bold header
 
         $no = 1; // nomor data dimulai dari 1
         $baris = 2; // baris data dimulai dari baris ke 2
         foreach ($penjualan as $key => $value) {
             $sheet->setCellValue('A'.$baris, $no);
             $sheet->setCellValue('B'.$baris, $value->user->username);
-            $sheet->setCellValue('C'.$baris, $value->pembeli);
-            $sheet->setCellValue('D'.$baris, $value->penjualan_tanggal);
-            $sheet->setCellValue('E'.$baris, $value->penjualan_jumlah);
+            $sheet->setCellValue('C'.$baris, $value->penjualan_kode);
+            $sheet->setCellValue('D'.$baris, $value->pembeli);
+            $sheet->setCellValue('E'.$baris, $value->penjualan_tanggal);
             $baris++;
             $no++;
         }
@@ -289,7 +288,7 @@ class PenjualanController extends Controller
     }
 
     public function export_pdf(){
-        $penjualan = PenjualanModel::select('user_id', 'pembeli', 'penjualan_tanggal', 'penjualan_jumlah')
+        $penjualan = PenjualanModel::select('user_id', 'penjualan_kode', 'pembeli', 'penjualan_tanggal')
         ->orderBy('penjualan_tanggal')
         ->with('user')
         ->get();

@@ -34,25 +34,21 @@
                          Apakah Anda yakin ingin menghapus data berikut?
                      </div>
                      <table class="table table-sm table-bordered table-striped">
-                     <tr>
+                        <tr>
                              <th class="text-right col-3">Nama Staff:</th>
                              <td class="col-9">{{ $penjualan->user->username }}</td>
-                         </tr>
-                         <tr>
-                             <th class="text-right col-3">Nama Pembeli:</th>
-                             <td class="col-9">{{ $penjualan->pembeli }}</td>
                          </tr>
                          <tr>
                              <th class="text-right col-3">Kode Penjualan:</th>
                              <td class="col-9">{{ $penjualan->penjualan_kode }}</td>
                          </tr>
                          <tr>
-                             <th class="text-right col-3">Tanggal Penjualan:</th>
-                             <td class="col-9">{{ $penjualan->penjualan_tanggal }}</td>
+                             <th class="text-right col-3">Nama Pembeli:</th>
+                             <td class="col-9">{{ $penjualan->pembeli }}</td>
                          </tr>
                          <tr>
-                             <th class="text-right col-3">Jumlah Penjualan:</th>
-                             <td class="col-9">{{ $penjualan->penjualan_jumlah }}</td>
+                             <th class="text-right col-3">Tanggal Penjualan:</th>
+                             <td class="col-9">{{ $penjualan->penjualan_tanggal }}</td>
                          </tr>
                      </table>
                  </div>

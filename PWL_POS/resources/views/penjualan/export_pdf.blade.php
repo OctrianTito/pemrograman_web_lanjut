@@ -78,7 +78,7 @@
      <table class="border-bottom-header">
          <tr>
              <td width="15%" class="text-left">
-                 <img src="{{ public_path('polinema-bw.png') }}" class="image">
+                 <img src="{{ 'polinema.png' }}" class="image">
              </td>
              <td width="85%">
                  <span class="text-center d-block font-11 font-bold mb-1">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI</span>
@@ -95,21 +95,19 @@
              <tr>
                  <th class="text-center">No</th>
                  <th class="text-center">Nama Staff</th>
-                 <th class="text-center">Pembeli</th>
                  <th class="text-center">Kode Penjualan</th>
+                 <th class="text-center">Pembeli</th>
                  <th class="text-center">Tanggal Penjualan</th>
-                 <th class="text-center">Pegawai</th>
              </tr>
          </thead>
          <tbody>
-             @foreach($penjualan as $b)
+             @foreach($penjualan as $item)
              <tr>
                  <td class="text-center">{{ $loop->iteration }}</td>
-                 <td>{{ $b->user->username}}</td>
-                 <td>{{ $b->pembeli }}</td>
-                 <td>{{ $b->penjualan_kode }}</td>
-                 <td>{{ $b->penjualan_tanggal }}</td>
-                 <td>{{ $b->penjualan_tanggal }}</td>
+                 <td>{{ $item->user->username}}</td>
+                 <td>{{ $item->penjualan_kode }}</td>
+                 <td>{{ $item->pembeli }}</td>
+                 <td>{{ $item->penjualan_tanggal }}</td>
              </tr>
              @endforeach
          </tbody>

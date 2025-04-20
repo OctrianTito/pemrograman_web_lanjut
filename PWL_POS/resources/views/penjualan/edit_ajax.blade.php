@@ -22,55 +22,38 @@
      @method('PUT')
      <div id="modal-master" class="modal-dialog modal-lg" role="document">
          <div class="modal-content">
-             <div class="modal-header">
-                 <h5 class="modal-title">Edit Data Penjualan</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                 </button>
-             </div>
+         <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Penjualan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
              <div class="modal-body">
                 <div class="form-group">
-                     <label>User</label>
-                     <div class="col-10">
+                     <label>Nama Staff</label>
                          <select class="form-control" id="user_id" name="user_id" required>
-                             <option value="">- Pilih User -</option>
+                             <option value="">- Pilih Staff -</option>
                              @foreach($user as $item)
-                                 <option value="{{ $item->user_id }}" {{ old('user_id', $pernjualan->user_id) == $item->user_id ? 'selected' : '' }}>{{ $item->username }}</option>
+                                 <option value="{{ $item->user_id }}" {{ old('user_id', $penjualan->user_id) == $item->user_id ? 'selected' : '' }}>{{ $item->username }}</option>
                              @endforeach
                          </select>
                          <small id="error-user_id" class="error-text form-text text-danger"></small>
-                     </div>
                  </div>
-                 <div class="form-group row">
-                     <label value="{{ $penjualan->penjualan_kode }}" class="col-sm-3 col-form-label text-right">Kode Penjualan</label>
-                     <div class="col-sm-9">
-                         <input type="text" name="penjualan_kode" id="penjualan_kode" class="form-control" required>
-                         <small id="error-penjualan_kode" class="error-text text-danger"></small>
-                     </div>
+                 <div class="form-group">
+                    <label>Kode Penjualan</label>
+                     <input value="{{ $penjualan->penjualan_kode }}" type="text" class="form-control" name="penjualan_kode" id="penjualan_kode" required>
+                     <small id="error-penjualan-kode" class="error-text form-text text-danger"></small>
                  </div>
- 
-                 <div class="form-group row">
-                     <label value="{{ $penjualan->pembeli }}" class="col-sm-3 col-form-label text-right">Nama Pembeli</label>
-                     <div class="col-sm-9">
-                         <input type="text" name="pembeli" id="pembeli" class="form-control" required>
-                         <small id="error-pembeli" class="error-text text-danger"></small>
-                     </div>
+                 <div class="form-group">
+                    <label>Nama Pembeli</label>
+                     <input value="{{ $penjualan->pembeli }}" type="text" class="form-control" name="pembeli" id="pembeli" required>
+                     <small id="error-pembeli" class="error-text form-text text-danger"></small>
                  </div>
- 
-                 <div class="form-group row">
-                     <label value="{{ $penjualan->penjualan_tanggal}}" type="datetime-local" name="stok_tanggal" id="stok_tanggal" class="form-control" required">Tanggal Penjualan</label>
-                     <div class="col-sm-9">
-                         <input type="date" name="penjualan_tanggal" id="penjualan_tanggal" class="form-control" required>
-                         <small id="error-penjualan_tanggal" class="error-text text-danger"></small>
-                     </div>
-                 </div>
-                 <div class="form-group row">
-                     <label for="penjualan_tanggal" class="col-sm-3 col-form-label text-right">Jumlah Penjualan</label>
-                     <div class="col-sm-9">
-                         <input type="number" name="penjualan_jumlah" id="penjualan_jumlah" class="form-control" required>
-                         <small id="error-penjualan_jumlah" class="error-text text-danger"></small>
-                     </div>
-                 </div>
+                 <div class="form-group">
+                    <label>Tanggal Penjualan</label>
+                    <input value="{{ $penjualan->penjualan_tanggal }}" type="datetime-local" name="penjualan_tanggal" id="penjualan_tanggal" class="form-control" required>
+                    <small id="error-stok-tanggal" class="error-text form-text text-danger"></small>
+                </div>
              </div>
              <div class="modal-footer">
                  <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
@@ -82,14 +65,13 @@
  
  <script>
      $(document).ready(function () {
-         $("#form-edit").validate({
-             rules: {
+     $("#form-edit").validate({
+         rules: {
              user_id: {required: true},
              penjualan_kode: {required: true, minlength: 5, maxlength: 20},
-             penjualan_jumlah: {required: true},
              pembeli: {required: true, maxlength: 100},
-             penjualan_tanggal: {required: true, date: true
-             },
+             penjualan_tanggal: {required: true, date: true}
+            },
              submitHandler: function (form) {
                  $.ajax({
                      url: form.action,

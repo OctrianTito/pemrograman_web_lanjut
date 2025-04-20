@@ -10,15 +10,15 @@ class PenjualanModel extends Model
 {
     use HasFactory;
 
-    protected $table = 't_stok';
+    protected $table = 't_penjualan';
  
      protected $primaryKey = 'penjualan_id';
      public $timestsamps = true;
  
      protected $fillable = [
          'user_id',
-         'pembeli',
          'penjualan_kode',
+         'pembeli',
          'penjualan_tanggal',
 
      ];

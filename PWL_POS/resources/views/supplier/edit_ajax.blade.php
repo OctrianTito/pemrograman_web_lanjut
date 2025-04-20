@@ -56,7 +56,7 @@
         $(document).ready(function() {
             $("#form-edit").validate({
                 rules: {
-                    supplier_kode: { required: true, minlength: 7, maxlength: 10 },
+                    supplier_kode: { required: true, minlength: 6, maxlength: 10 },
                     supplier_nama: { required: true, maxlength: 100 },
                     supplier_alamat: { required: true }
                 },
@@ -73,7 +73,7 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                dataUser.ajax.reload();
+                                tableSupplier.ajax.reload();
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {

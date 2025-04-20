@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input value="" type="password" name="password" id="password" class="formcontrol" required>
+                    <input value="" type="password" name="password" id="password" class="form-control" required>
                     <small id="error-password" class="error-text form-text text-danger"></small>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataUser.ajax.reload();
+                            tableUser.ajax.reload();
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {

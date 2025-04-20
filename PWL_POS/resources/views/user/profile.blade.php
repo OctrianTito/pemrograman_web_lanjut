@@ -8,11 +8,9 @@
                          <div class="card-body box-profile">
                              <div class="text-center">
                                  @if ($user->profile_picture)
-                                 <img class="profile-user-img img-fluid img-circle"
-                                      src="{{ $user->profile_picture }}"
-                                      alt="User profile picture">
+                                 <img class="profile-user-img img-fluid img-circle" src="{{ $user->profile_picture }}" alt="User profile picture">
                                  @else
-                                     <img class="profile-user-img img-fluid img-circle" src="{{ asset('adminlte\dist\img\user8-128x128.jpg') }}" alt="User profile picture default">
+                                     <img class="profile-user-img img-fluid img-circle" src="{{ asset('adminlte\dist\img\user2-160x160.jpg') }}" alt="User profile picture default">
                                  @endif
                              </div>
  

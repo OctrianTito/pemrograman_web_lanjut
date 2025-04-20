@@ -11,44 +11,29 @@
  
              <div class="modal-body">
                 <div class="form-group">
-                     <label>User</label>
-                     <div class="col-10">
+                     <label>Nama Staff</label>
                          <select class="form-control" id="user_id" name="user_id" required>
-                             <option value="">- Pilih User -</option>
+                             <option value="">- Pilih Staff -</option>
                              @foreach($user as $item)
                                  <option value="{{ $item->user_id }}">{{ $item->username }}</option>
                              @endforeach
                          </select>
                          <small id="error-user_id" class="error-text form-text text-danger"></small>
-                     </div>
                  </div>
-                 <div class="form-group row">
-                     <label for="penjualan_kode" class="col-sm-3 col-form-label text-right">Kode Penjualan</label>
-                     <div class="col-sm-9">
-                         <input type="text" name="penjualan_kode" id="penjualan_kode" class="form-control" required>
-                         <small id="error-penjualan_kode" class="error-text text-danger"></small>
-                     </div>
+                 <div class="form-group">
+                     <label>Kode Penjualan</label>
+                     <input type="text" name="penjualan_kode" id="penjualan_kode" class="form-control" required>
+                     <small id="error-penjualan-kode" class="error-text form-text text-danger"></small>
                  </div>
-                 <div class="form-group row">
-                     <label for="pembeli" class="col-sm-3 col-form-label text-right">Nama Pembeli</label>
-                     <div class="col-sm-9">
-                         <input type="text" name="pembeli" id="pembeli" class="form-control" required>
-                         <small id="error-pembeli" class="error-text text-danger"></small>
-                     </div>
+                 <div class="form-group">
+                     <label>Nama Pembeli</label>
+                     <input type="text" name="pembeli" id="pembeli" class="form-control" required>
+                     <small id="error-pembeli" class="error-text form-text text-danger"></small>
                  </div>
-                 <div class="form-group row">
-                     <label for="penjualan_tanggal" class="col-sm-3 col-form-label text-right">Tanggal Penjualan</label>
-                     <div class="col-sm-9">
-                         <input type="date" name="penjualan_tanggal" id="penjualan_tanggal" class="form-control" required>
-                         <small id="error-penjualan_tanggal" class="error-text text-danger"></small>
-                     </div>
-                 </div>
-                 <div class="form-group row">
-                     <label for="penjualan_tanggal" class="col-sm-3 col-form-label text-right">Jumlah Penjualan</label>
-                     <div class="col-sm-9">
-                         <input type="number" name="penjualan_jumlah" id="penjualan_jumlah" class="form-control" required>
-                         <small id="error-penjualan_jumlah" class="error-text text-danger"></small>
-                     </div>
+                 <div class="form-group">
+                     <label>Tanggal Penjualan</label>
+                     <input type="date" name="penjualan_tanggal" id="penjualan_tanggal" class="form-control" required>
+                     <small id="error-penjualan-tanggal" class="error-text form-text text-danger"></small>
                  </div>
              </div>
  
@@ -66,7 +51,6 @@
          rules: {
              user_id: {required: true},
              penjualan_kode: {required: true, minlength: 5, maxlength: 20},
-             penjualan_jumlah: {required: true},
              pembeli: {required: true, maxlength: 100},
              penjualan_tanggal: {required: true, date: true
              }

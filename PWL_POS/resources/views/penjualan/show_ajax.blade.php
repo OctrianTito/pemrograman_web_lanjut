@@ -17,20 +17,16 @@
                     <td>{{ $penjualan->user->username }} ({{ $penjualan->user->level->level_nama }})</td>
                 </tr>
                  <tr>
-                     <th>Nama Pembeli</th>
-                     <td>{{ $penjualan->pembeli }}</td>
-                 </tr>
-                 <tr>
                      <th>Kode Penjualan</th>
                      <td>{{ $penjualan->penjualan_kode }}
                  </tr>
                  <tr>
+                     <th>Nama Pembeli</th>
+                     <td>{{ $penjualan->pembeli }}</td>
+                 </tr>
+                 <tr>
                      <th>Tanggal Penjualan</th>
                      <td>{{ $penjualan->penjualan_tanggal }}</td>
-                 </tr>
-                 <t>
-                     <th>Jumlah Penjualan</th>
-                     <td>{{ $penjualan->penjualan_jumlah }}</td>
                  </tr>
              </table>
      </div>

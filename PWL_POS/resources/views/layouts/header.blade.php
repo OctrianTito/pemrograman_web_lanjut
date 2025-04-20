@@ -94,6 +94,7 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
       </li>
+      
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -133,8 +134,8 @@
       </li>
       <li class="nav-item"> 
         <a href="{{ url('/logout') }}" class="nav-link"> 
-          <i class="fas fa-door-open"></i> 
-          <span class="nav-link-text">Logout</span> 
+          <i class="fas fa-door-open" style="color: darkred;"></i> 
+          <span class="nav-link-text" style="color: darkred;">Logout</span> 
         </a> 
       </li> 
     </ul>

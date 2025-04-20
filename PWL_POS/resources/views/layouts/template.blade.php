@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name') }} - PM Laravel Starter Code</title>
+    <title>{{ config('app.name') }} POS</title>
 
     <!-- Untuk mengirimkan token Laravel CSRF pada setiap request ajax -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -40,8 +40,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ url('/') }}" class="brand-link">
-                <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img">
+                <img src="{{ asset('pos.jpg') }}" alt="POS Logo" class="brand-image img-circle elevation-3" style="object-fit: cover; width: 50px; height: 50px; border-radius: 50%;">
                 <span class="brand-text font-weight-bold">Point of Sales</span>
             </a>
 

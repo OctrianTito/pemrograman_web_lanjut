@@ -175,7 +175,7 @@ class SupplierController extends Controller
         // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'supplier_kode' => 'required|string|min:7|max:10|unique:m_supplier,supplier_kode',
+                'supplier_kode' => 'required|string|min:6|max:10|unique:m_supplier,supplier_kode',
                 'supplier_nama' => 'required|string|max:100', 
                 'supplier_alamat' => 'required|string' 
             ];
@@ -216,7 +216,7 @@ class SupplierController extends Controller
         // cek apakah request dari ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'supplier_kode' => 'required|string|min:7|max:10|unique:m_supplier,supplier_kode,' . $id . ',supplier_id',
+                'supplier_kode' => 'required|string|min:6|max:10|unique:m_supplier,supplier_kode,' . $id . ',supplier_id',
                 'supplier_nama' => 'required|string|max:100', 
                 'supplier_alamat' => 'required|string' 
             ];

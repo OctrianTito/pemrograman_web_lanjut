@@ -21,7 +21,6 @@
                  </div>
                  <div class="form-group">
                      <label>User</label>
-                     <div class="col-10">
                          <select class="form-control" id="user_id" name="user_id" required>
                              <option value="">- Pilih User -</option>
                              @foreach($user as $item)
@@ -29,7 +28,6 @@
                              @endforeach
                          </select>
                          <small id="error-user_id" class="error-text form-text text-danger"></small>
-                     </div>
                  </div>
                  <div class="form-group">
                      <label>Tanggal Stok</label>
@@ -65,7 +63,7 @@
                      data: $(form).serialize(),
                      success: function (response) {
                          if (response.status) {
-                             $('#modal-stok').modal('hide');
+                             $('#myModal').modal('hide');
                              Swal.fire({
                                  icon: 'success',
                                  title: 'Berhasil',

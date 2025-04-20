@@ -77,7 +77,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         });
     });
 
-    Route::middleware(['authorize:ADM,MNG'])->group(function(): void{
+    Route::middleware(['authorize:ADM,MNG,OWN'])->group(function(): void{
         Route::group(['prefix' => 'supplier'], function(){
             Route::get('/', [SupplierController::class, 'index']);              // Menampilkan halaman awal
             Route::post('/list', [SupplierController::class, 'list']);          // Menampilkan data user dalam bentuk json untuk datatables
@@ -95,7 +95,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         });
     });
 
-    Route::middleware(['authorize:STF,ADM,MNG'])->group(function(){
+    Route::middleware(['authorize:STF,ADM,MNG,OWN'])->group(function(){
         Route::group(['prefix' => 'barang'], function(){
             Route::get('/', [BarangController::class, 'index']);              // Menampilkan halaman awal
             Route::post('/list', [BarangController::class, 'list']);          // Menampilkan data user dalam bentuk json untuk datatables
